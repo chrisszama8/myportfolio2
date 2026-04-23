@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danny Symon | Award-Winning Graphic Designer</title>
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)'], ['$$', '$$'], ['\\[', '\\]']], 
+                displayMath: []
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== CSS RESET & BASE ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #ffffff;
+            --accent: #ff3d00;
+            --accent-light: #ff6e40;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-800: #262626;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.08);
+            --shadow-md: 0 10px 40px rgba(0,0,0,0.12);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --shadow-xl: 0 30px 80px rgba(0,0,0,0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background: var(--secondary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* ========== CUSTOM CURSOR ========== */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.15s ease, background 0.15s ease;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 61, 0, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(2);
+            background: var(--accent);
+        }
+
+        .cursor-follower.hover {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* ========== LOADING SCREEN ========== */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+
+        .loader-bar {
+            width: 300px;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .loader-progress {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            animation: loadProgress 2s ease-in-out forwards;
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ========== SMOOTH SCROLL CONTAINER ========== */
+        .smooth-scroll {
+            will-change: transform;
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero-advanced {
+            min-height: 100vh;
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 50px;
+        }
+
+        .hero-bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: floatShape 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: #764ba2;
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -7s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: #4facfe;
+            top: 50%;
+            left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        .hero-content-advanced {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text-advanced {
+            color: white;
+        }
+
+        .hero-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid var(--accent);
+            border-radius: 30px;
+        }
+
+        .hero-title-advanced {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 35px;
+            letter-spacing: -3px;
+        }
+
+        .hero-title-advanced .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title-advanced .line span {
+            display: block;
+            animation: slideUp 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .hero-title-advanced .line:nth-child(2) span {
+            animation-delay: 0.15s;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-description-advanced {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 45px;
+            max-width: 480px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 18px 42px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 61, 0, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: gap 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            gap: 18px;
+        }
+
+        .btn-secondary svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-secondary:hover svg {
+            transform: translateX(5px);
+        }
+
+        .hero-image-advanced {
+            position: relative;
+        }
+
+        .image-frame {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(135deg, var(--accent), #764ba2, #4facfe);
+            border-radius: 32px;
+            z-index: -1;
+            animation: borderRotate 6s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 27px;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease, transform 0.5s ease;
+        }
+
+        .image-frame:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .floating-badge-adv {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: white;
+            padding: 22px 32px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-12px) rotate(-3deg); }
+        }
+
+        .badge-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .badge-text {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        /* ========== SECTION STYLES ========== */
+        section {
+            padding: 150px 50px;
+            position: relative;
+        }
+
+        .section-header-advanced {
+            margin-bottom: 90px;
+            max-width: 900px;
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .section-title-advanced {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            color: var(--primary);
+        }
+
+        .section-title-advanced .highlight {
+            background: linear-gradient(135deg, var(--accent), #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-advanced {
+            background: var(--gray-100);
+        }
+
+        .about-grid-advanced {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--gray-800);
+            margin-bottom: 28px;
+        }
+
+        .skills-container-advanced {
+            position: sticky;
+            top: 120px;
+        }
+
+        .skills-card-advanced {
+            background: white;
+            padding: 55px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-card-advanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), #764ba2, #4facfe);
+        }
+
+        .skills-card-advanced h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 35px;
+            color: var(--primary);
+        }
+
+        .skill-category {
+            margin-bottom: 38px;
+        }
+
+        .skill-category h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            background: var(--gray-100);
+            padding: 11px 20px;
+            border-radius: 25px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ========== PROJECTS SECTION ========== */
+        .projects-advanced {
+            background: var(--primary);
+            color: white;
+            overflow: hidden;
+        }
+
+        .projects-advanced .section-title-advanced {
+            color: white;
+        }
+
+        .projects-intro-advanced {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 70px;
+            max-width: 750px;
+        }
+
+        .gallery-wrapper-advanced {
+            position: relative;
+        }
+
+        .gallery-main-advanced {
+            width: 100%;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .gallery-main-advanced img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gallery-main-advanced:hover img {
+            transform: scale(1.03);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+        }
+
+        .gallery-main-advanced:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .overlay-content p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ========== LOGO DESIGN ========== */
+        .logos-advanced {
+            background: linear-gradient(180deg, var(--secondary) 0%, var(--gray-100) 100%);
+        }
+
+        .logos-intro-advanced {
+            font-size: 1.15rem;
+            line-height: 1.95;
+            color: var(--gray-800);
+            margin-bottom: 60px;
+            max-width: 800px;
+        }
+
+        .logo-showcase-advanced {
+            background: var(--primary);
+            padding: 65px;
+            border-radius: 40px;
+            position: relative;
+            transform: perspective(1000px) rotateY(-3deg);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .logo-showcase-advanced:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .logo-showcase-advanced img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* ========== BRANDING CASE STUDY ========== */
+        .branding-advanced {
+            background: var(--secondary);
+            position: relative;
+        }
+
+        .branding-layout-advanced {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 90px;
+            align-items: center;
+        }
+
+        .case-study-header {
+            margin-bottom: 35px;
+        }
+
+        .case-study-header h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .case-study-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-study-content p {
+            font-size: 1.08rem;
+            line-height: 1.95;
+            color: var(--gray-800);
+            margin-bottom: 22px;
+        }
+
+        .mockup-container-advanced {
+            position: relative;
+        }
+
+        .mockup-frame-advanced {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 35px;
+            border-radius: 35px;
+            transform: perspective(1200px) rotateX(5deg) rotateY(-5deg);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .mockup-frame-advanced:hover {
+            transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
+        }
+
+        .mockup-frame-advanced img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========== SOCIAL MEDIA & PRINT ========== */
+        .social-media-advanced {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-media-advanced::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .social-media-advanced .section-title-advanced {
+            color: white;
+        }
+
+        .content-split-advanced {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 70px;
+            align-items: start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .narrative-advanced p {
+            font-size: 1.1rem;
+            line-height: 1.95;
+            color: rgba(255,255,255,0.92);
+            margin-bottom: 24px;
+        }
+
+        .visual-panel-advanced {
+            background: white;
+            padding: 28px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-xl);
+            transform: rotate(1deg);
+            transition: transform 0.5s ease;
+        }
+
+        .visual-panel-advanced:hover {
+            transform: rotate(0deg);
+        }
+
+        .visual-panel-advanced img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .print-design-advanced {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .print-design-advanced .section-title-advanced {
+            color: white;
+        }
+
+        /* ========== CLIENTS SHOWCASE ========== */
+        .clients-advanced {
+            background: var(--primary);
+            color: white;
+            position: relative;
+        }
+
+        .clients-intro-advanced {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 60px;
+            max-width: 850px;
+        }
+
+        .clients-grid-advanced {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            padding: 70px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .clients-grid-advanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.3;
+            filter: blur(60px);
+        }
+
+        .clients-grid-advanced img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact-advanced {
+            background: linear-gradient(180deg, var(--gray-100) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-layout-advanced {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 90px;
+            align-items: start;
+        }
+
+        .contact-message-advanced p {
+            font-size: 1.2rem;
+            line-height: 1.95;
+            color: var(--gray-800);
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+
+        .contact-card-advanced {
+            background: white;
+            padding: 55px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-xl);
+            position: sticky;
+            top: 120px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-card-advanced:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .contact-card-advanced h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 35px;
+        }
+
+        .contact-item-advanced {
+            padding: 22px 0;
+            border-bottom: 2px solid var(--gray-100);
+            transition: padding-left 0.3s ease;
+        }
+
+        .contact-item-advanced:last-child {
+            border-bottom: none;
+        }
+
+        .contact-item-advanced:hover {
+            padding-left: 15px;
+        }
+
+        .contact-item-advanced label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .contact-item-advanced span,
+        .contact-item-advanced a {
+            font-size: 1.15rem;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* ========== SCROLL PROGRESS BAR ========== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #764ba2, #4facfe);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 1200px) {
+            .hero-content-advanced,
+            .about-grid-advanced,
+            .branding-layout-advanced,
+            .content-split-advanced,
+            .contact-layout-advanced {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .skills-container-advanced,
+            .contact-card-advanced {
+                position: static;
+            }
+
+            section {
+                padding: 100px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-advanced {
+                padding: 100px 25px;
+            }
+
+            .hero-title-advanced {
+                font-size: 3rem;
+            }
+
+            section {
+                padding: 80px 25px;
+            }
+
+            .section-title-advanced {
+                font-size: 2.3rem;
+            }
+
+            .logo-showcase-advanced,
+            .mockup-frame-advanced,
+            .clients-grid-advanced {
+                padding: 35px;
+                transform: none !important;
+            }
+
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* ========== ANIMATIONS ON SCROLL ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), 
+                        transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========== CUSTOM SCROLLBAR ========== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--accent), #764ba2);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--accent-light), #764ba2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== LOADING SCREEN ========== -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-text">Danny Symon</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CUSTOM CURSOR ========== -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- ========== SCROLL PROGRESS ========== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav id="navbar">
+        <a href="#" class="logo">DS.</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero-advanced" id="hero">
+        <div class="hero-bg-animation">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        
+        <div class="hero-content-advanced">
+            <div class="hero-text-advanced">
+                <span class="hero-label">Graphic Designer • Lilongwe, Malawi</span>
+                <h1 class="hero-title-advanced">
+                    <span class="line"><span>Creative</span></span>
+                    <span class="line"><span>Designer</span></span>
+                    <span class="line"><span>& Developer</span></span>
+                </h1>
+                <p class="hero-description-advanced">
+                    A passionate creative professional specializing in branding, visual identity, and digital experiences that captivate audiences and elevate brands since 2016.
+                </p>
+                <div class="cta-group">
+                    <a href="#projects" class="btn-primary">View My Work</a>
+                    <a href="#contact" class="btn-secondary">
+                        Get In Touch 
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image-advanced">
+                <div class="image-frame">
+                    <img src="https://qc4n.bigmodel.cn/548bePadQ_cropped.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1808462831&Signature=UpMCl9gF7sgx2xdqcdYOPBCosoo%3D" alt="Danny Symon Portrait">
+                </div>
+                <div class="floating-badge-adv">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">Available for Projects</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ME ========== -->
+    <section class="about-advanced" id="about">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// About Me</span>
+            <h2 class="section-title-advanced">
+                Crafting Visual Stories<br>
+                That <span class="highlight">Inspire Action</span>
+            </h2>
+        </div>
+        
+        <div class="about-grid-advanced">
+            <div class="about-content reveal-left">
+                <p>
+                    My name is Danny Symon, a passionate Graphic Designer based in Lilongwe, Malawi. I have been working in the creative industry since 2016, helping brands, artists, and businesses communicate their ideas through strong and impactful visual design.
+                </p>
+                <p>
+                    I specialize in creating high-quality graphics for branding, social media, marketing, and digital campaigns. Over the years, I have developed strong skills in Adobe Photoshop, as well as experience using Adobe Illustrator and CorelDRAW to deliver professional and creative design solutions.
+                </p>
+                <p>
+                    Currently, I work as a Graphic Designer at Hustle Media Production, where I create visual content for brands and businesses across different industries. My goal is always to combine creativity with strategy to produce designs that not only look good but also communicate effectively.
+                </p>
+                <p>
+                    Beyond my professional work, I continue to explore new ideas, trends, and creative techniques to keep improving my craft and delivering designs that make a lasting impression.
+                </p>
+            </div>
+            
+            <div class="skills-container-advanced reveal-right">
+                <div class="skills-card-advanced">
+                    <h3>Expertise & Skills</h3>
+                    
+                    <div class="skill-category">
+                        <h4>Core Competencies</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Graphic Design</span>
+                            <span class="skill-tag">Brand Identity</span>
+                            <span class="skill-tag">Social Media</span>
+                            <span class="skill-tag">Marketing Design</span>
+                            <span class="skill-tag">Photo Editing</span>
+                            <span class="skill-tag">Print Design</span>
+                            <span class="skill-tag">Layout Design</span>
+                            <span class="skill-tag">Creative Direction</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>Software Proficiency</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Photoshop (Advanced)</span>
+                            <span class="skill-tag">Illustrator (Intermediate)</span>
+                            <span class="skill-tag">InDesign (Intermediate)</span>
+                            <span class="skill-tag">CorelDRAW (Intermediate)</span>
+                            <span class="skill-tag">Canva (Intermediate)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MY PROJECTS ========== -->
+    <section class="projects-advanced" id="projects">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// Selected Work</span>
+            <h2 class="section-title-advanced">
+                Featured<br>
+                <span class="highlight">Projects</span>
+            </h2>
+        </div>
+        
+        <p class="projects-intro-advanced reveal">
+            A curated selection of my design work across various categories including event promotions, brand campaigns, social media content, logo designs, and print materials. Each project demonstrates my ability to deliver creative solutions tailored to specific client needs and target audiences.
+        </p>
+        
+        <div class="gallery-wrapper-advanced reveal">
+            <div class="gallery-main-advanced">
+                <img src="https://qc4n.bigmodel.cn/2201dH9Fz_cropped.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1808462833&Signature=zC7lMAXtL77NpA6IxuJcStALjNQ%3D" alt="Project Gallery">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <h4>Project Collection</h4>
+                        <p>Event Promotions • Brand Campaigns • Social Media</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LOGO DESIGN ========== -->
+    <section class="logos-advanced" id="work">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// Logo Design</span>
+            <h2 class="section-title-advanced">
+                Visual Identity<br>
+                <span class="highlight">Masterpieces</span>
+            </h2>
+        </div>
+        
+        <p class="logos-intro-advanced reveal">
+            A logo is a visual identity element designed to represent a brand, business, or individual in a unique and memorable way. It combines typography, symbols, shapes, and color choices to communicate the brand's values, personality, and purpose. Each logo is carefully crafted to ensure it is clean, versatile, and impactful across both digital and print platforms, helping to build strong brand recognition and a professional image.
+        </p>
+        
+        <div class="logo-showcase-advanced reveal">
+            <img src="https://qc4n.bigmodel.cn/b8bfeXO84_cropped.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1808462810&Signature=176kTaz1oLpmNeIlXwY9t3xt8tI%3D" alt="Logo Design Collection">
+        </div>
+    </section>
+
+    <!-- ========== BRANDING CASE STUDY ========== -->
+    <section class="branding-advanced" id="branding">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// Case Study</span>
+            <h2 class="section-title-advanced">
+                Branding &<br>
+                <span class="highlight">Visual Identity</span>
+            </h2>
+        </div>
+        
+        <div class="branding-layout-advanced">
+            <div class="case-study-content reveal-left">
+                <div class="case-study-header">
+                    <h3>Zifika Express</h3>
+                    <span class="case-study-tag">Delivery Service Branding</span>
+                </div>
+                
+                <p>
+                    This branding project was created for Zifika Express, a delivery and errand service brand focused on speed, reliability, and convenience. The logo creatively combines the letter "Z" with a delivery van and motion lines to visually communicate fast delivery and efficient service.
+                </p>
+                <p>
+                    The green color represents growth, trust, freshness, and reliability, while the bold typography gives the brand a strong and modern identity. The overall design reflects a professional doorstep delivery service that is easy to recognize and memorable.
+                </p>
+                <p>
+                    The complete brand identity system includes applications across tote bags, mugs, caps, water bottles, notebooks, pens, and coasters, demonstrating versatility and consistency across all touchpoints.
+                </p>
+            </div>
+            
+            <div class="mockup-container-advanced reveal-right">
+                <div class="mockup-frame-advanced">
+                    <img src="https://qc4n.bigmodel.cn/abe70kJVn_cropped.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1808462836&Signature=4aqwSq3Qo0ag2RKZglaYc92%2B2sI%3D" alt="Zifika Express Branding Mockups">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SOCIAL MEDIA DESIGNS ========== -->
+    <section class="social-media-advanced" id="social">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// Social Media</span>
+            <h2 class="section-title-advanced">
+                Digital Content<br>
+                <span style="-webkit-text-fill-color: white;">That Engages</span>
+            </h2>
+        </div>
+        
+        <div class="content-split-advanced">
+            <div class="narrative-advanced reveal-left">
+                <p>
+                    This section showcases my creative work for social media platforms, including promotional flyers, campaign posts, engagement content, event graphics, and branded visuals. My designs are created to capture attention, strengthen brand identity, and increase audience engagement across platforms such as Facebook, Instagram, X, and other digital channels.
+                </p>
+                <p>
+                    Each design focuses on clear messaging, modern visuals, and strategic content presentation to help brands connect effectively with their target audience and achieve their marketing goals.
+                </p>
+                <p>
+                    Featured work includes social media campaigns for The Blackheath House restaurant, showcasing their food offerings, customer reviews, special events, and seasonal promotions.
+                </p>
+            </div>
+            
+            <div class="visual-panel-advanced reveal-right">
+                <img src="https://qc4n.bigmodel.cn/cb1f3oALi_cropped.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1808462804&Signature=uUZ8rSnF3SSkYMxnUF%2Bl%2Fh3xfmA%3D" alt="Social Media Designs">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRINT DESIGN ========== -->
+    <section class="print-design-advanced" id="print">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// Print Design</span>
+            <h2 class="section-title-advanced">
+                Tangible<br>
+                <span style="-webkit-text-fill-color: white;">Excellence</span>
+            </h2>
+        </div>
+        
+        <div class="content-split-advanced">
+            <div class="narrative-advanced reveal-left">
+                <p>
+                    This section highlights my expertise in creating high-quality print materials designed for both branding and marketing purposes. It includes posters, flyers, banners, roll-ups, business cards, brochures, and other promotional materials.
+                </p>
+                <p>
+                    Each design is developed with strong visual balance, clear typography, and print-ready specifications to ensure professional output. My focus is on delivering impactful designs that effectively communicate the brand message while maintaining consistency, clarity, and a polished appearance across all physical formats.
+                </p>
+                <p>
+                    Featured print projects include event posters, restaurant menus, promotional flyers, and marketing collateral for various clients in hospitality, entertainment, and business sectors.
+                </p>
+            </div>
+            
+            <div class="visual-panel-advanced reveal-right">
+                <img src="https://qc4n.bigmodel.cn/2bd75h0dK_cropped.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1808462807&Signature=m8ynHAIm1%2BAabZO225I9SiYjXZo%3D" alt="Print Design Examples">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CLIENTS ========== -->
+    <section class="clients-advanced" id="clients">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// Clients</span>
+            <h2 class="section-title-advanced">
+                Trusted By<br>
+                <span class="highlight">Industry Leaders</span>
+            </h2>
+        </div>
+        
+        <p class="clients-intro-advanced reveal">
+            This section showcases the brands, businesses, and organizations I have had the opportunity to work with throughout my design journey. My experience includes delivering creative solutions in branding, logo design, social media content, print design, and promotional materials across different industries including media production, logistics/delivery, tourism/travel, agriculture, hospitality, gaming/entertainment, retail, consulting, and more.
+        </p>
+        
+        <div class="clients-grid-advanced reveal">
+            <img src="https://qc4n.bigmodel.cn/96bf0Hhh3_cropped.png?UCloudPublicKey=TOKEN_3f4277c6-f8d6-41a9-968b-dbfa0994d483&Expires=1808462813&Signature=gYjNsSbiFUDWx78fhjQXJ9k80%2F0%3D" alt="Client Logos">
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="contact-advanced" id="contact">
+        <div class="section-header-advanced reveal">
+            <span class="section-label">// Contact</span>
+            <h2 class="section-title-advanced">
+                Let's Create<br>
+                <span class="highlight">Together</span>
+            </h2>
+        </div>
+        
+        <div class="contact-layout-advanced">
+            <div class="contact-message-advanced reveal-left">
+                <p>
+                    Thank you for taking the time to explore my portfolio. I am always open to new creative opportunities, collaborations, and exciting design projects. Whether you need branding, logo design, social media content, print materials, or full visual identity solutions, I am ready to bring your ideas to life with professional and impactful designs.
+                </p>
+                <p>
+                    Let's work together to create something exceptional for your brand. I look forward to hearing about your next project and bringing your vision to reality!
+                </p>
+            </div>
+            
+            <div class="contact-card-advanced reveal-right">
+                <h3>Get In Touch</h3>
+                
+                <div class="contact-item-advanced">
+                    <label>Primary Phone</label>
+                    <a href="tel:+265997711624">+265 997 711 624</a>
+                </div>
+                
+                <div class="contact-item-advanced">
+                    <label>Secondary Phone</label>
+                    <a href="tel:+265885088209">+265 885 088 209</a>
+                </div>
+                
+                <div class="contact-item-advanced">
+                    <label>Email Address</label>
+                    <a href="mailto:dannysymon8@gmail.com">dannysymon8@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <p>&copy; 2024 Danny Symon. Crafted with passion and precision.</p>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ========== LOADING SCREEN ==========
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2200);
+        });
+
+        // ========== CUSTOM CURSOR ==========
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursorFollower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('a, button, .btn-primary, .skill-tag, .image-frame');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                follower.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                follower.classList.remove('hover');
+            });
+        });
+
+        // ========== SCROLL PROGRESS BAR ==========
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        });
+
+        // ========== REVEAL ANIMATIONS ON SCROLL ==========
+        const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+        function revealOnScroll() {
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ========== SMOOTH SCROLL FOR NAV LINKS ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========== PARALLAX EFFECT ON SHAPES ==========
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.floating-shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.3;
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // ========== MAGNETIC BUTTON EFFECT ==========
+        const magneticBtns = document.querySelectorAll('.btn-primary');
+        
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // ========== IMAGE TILT EFFECT ==========
+        const tiltImages = document.querySelectorAll('.image-frame, .mockup-frame-advanced, .logo-showcase-advanced');
+        
+        tiltImages.forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                
+                element.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+            });
+        });
+    </script>
+
+</body>
+</html>
